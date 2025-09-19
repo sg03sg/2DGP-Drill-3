@@ -11,10 +11,11 @@ grass = load_image('grass.png')
 character = load_image('character.png')
 
 # 사각형 꼭짓점 좌표 (창의 네 모서리, 잔디 높이 고려)
-MARGIN = 45  # 캐릭터와 잔디가 화면 밖으로 나가지 않게 여백
+MARGIN = 45  # 좌우 여백
+BOTTOM_Y = 90  # 잔디 위 y값
 points = [
-    (MARGIN, MARGIN),  # 좌하단
-    (WINDOW_WIDTH - MARGIN, MARGIN),  # 우하단
+    (MARGIN, BOTTOM_Y),  # 좌하단 (y=90)
+    (WINDOW_WIDTH - MARGIN, BOTTOM_Y),  # 우하단 (y=90)
     (WINDOW_WIDTH - MARGIN, WINDOW_HEIGHT - MARGIN),  # 우상단
     (MARGIN, WINDOW_HEIGHT - MARGIN)  # 좌상단
 ]
