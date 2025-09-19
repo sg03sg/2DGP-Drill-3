@@ -2,16 +2,21 @@ from pico2d import *
 
 open_canvas()
 
+# 창 크기 정보 (pico2d 기본값: 800x600)
+WINDOW_WIDTH = 800
+WINDOW_HEIGHT = 600
+
+# 이미지 로드
 grass = load_image('grass.png')
 character = load_image('character.png')
 
-# 사각형 꼭짓점 좌표 (시계방향)
+# 사각형 꼭짓점 좌표 (창의 네 모서리, 잔디 높이 고려)
+MARGIN = 45  # 캐릭터와 잔디가 화면 밖으로 나가지 않게 여백
 points = [
-    (400, 90),   # 시작점 (아래쪽 중앙)
-    (700, 90),   # 오른쪽 아래
-    (700, 300),  # 오른쪽 위
-    (400, 300),  # 왼쪽 위
-    (400, 90)    # 다시 시작점
+    (MARGIN, MARGIN),  # 좌하단
+    (WINDOW_WIDTH - MARGIN, MARGIN),  # 우하단
+    (WINDOW_WIDTH - MARGIN, WINDOW_HEIGHT - MARGIN),  # 우상단
+    (MARGIN, WINDOW_HEIGHT - MARGIN)  # 좌상단
 ]
 
 current = 0
@@ -22,7 +27,7 @@ while True:
     x2, y2 = points[next]
     for t in range(0, 101, 2):
         clear_canvas()
-        grass.draw(400, 30)
+        grass.draw(WINDOW_WIDTH // 2, 30)
         x = x1 + (x2 - x1) * t / 100
         y = y1 + (y2 - y1) * t / 100
         character.draw(x, y)
@@ -31,4 +36,3 @@ while True:
     current = next
 
 close_canvas()
-
