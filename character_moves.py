@@ -11,9 +11,11 @@ character = load_image('character.png')
 c_x =400
 c_y =90
 
-moves=1
+moves=0
 speed =10
 line =0
+degree =0
+
 
 def move_ractangle(x,y):
     if y==90 and x < 780:
@@ -46,6 +48,18 @@ def move_triangle(x,y,line):
     elif line ==-1:
         return 400,90,0
 
+def move_circle(deg):
+    deg += 2
+    x = 400+ 210 * math.cos(-deg/180 * math.pi-math.pi/2)
+    y= 300+ 210 * math.sin(-deg/180 * math.pi-math.pi/2)
+
+    if deg >= 361:
+        x=400
+        y=90
+        deg =0
+
+    return x,y,deg
+
 while True:
     clear_canvas_now()
     grass.draw_now(400,30)
@@ -56,9 +70,12 @@ while True:
 
     elif moves == 1:
         c_x,c_y,line = move_triangle(c_x,c_y,line)
-    #
-    # elif moves == 2:
-    #     move_circle(c_x,c_y)
+
+    elif moves == 2:
+        c_x,c_y,degree =move_circle(degree)
+
+    if (c_x,c_y) == (400,90):
+        moves = (moves +1) %3
 
 
     delay(0.01)
